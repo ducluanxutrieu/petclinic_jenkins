@@ -35,7 +35,9 @@ pipeline {
 //		when { 
 //			branch 'master'
 //            }
-            steps { echo '=== Pushing Petclinic Docker Image ===' docker.withRegistry('https://registry.hub.docker.com', 'dockerHubCredentials') { 
+            steps { 
+		echo '=== Pushing Petclinic Docker Image ===' 
+		docker.withRegistry('https://registry.hub.docker.com', 'dockerHubCredentials') { 
 		app.push("${env.BUILD_NUMBER}")
 		app.push("latest") }
               }    
