@@ -1,3 +1,4 @@
+def mvnHome = tool name: 'Apache Maven 3.6.3', type: 'maven'
 pipeline {
     agent any
        triggers {
@@ -7,7 +8,6 @@ pipeline {
         stage('Build Application') { 
             steps {
                 echo '=== Building Petclinic Application ==='
-		def mvnHome = tool name: 'Apache Maven 3.6.0', type: 'maven'
 		sh '${mvnHome}/bin/mvn -B -DskipTests clean package'
         }        }
         stage('Test Application') {
