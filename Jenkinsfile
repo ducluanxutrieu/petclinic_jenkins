@@ -1,4 +1,9 @@
 pipeline {
+    environment {
+        registry = 'ducluanxutrieu/petclinic-spinnaker-jenkins'
+        registryCredential = 'dockerHubCredentials'
+        dockerImage = ''
+    }
     agent any
     triggers {
         pollSCM '* * * * *'
@@ -28,9 +33,12 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo '=== Building Petclinic Docker Image ==='
-                sh 'docker build -t ducluanxutrieu/petclinic-spinnaker-jenkins .'
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                }
             }
         }
+        // env.BUILD_NUMBER
         stage('Push Docker Image') {
             //        when {
             //            branch 'master'
@@ -38,9 +46,9 @@ pipeline {
             steps {
                 echo '=== Pushing Petclinic Docker Image ==='
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerHubCredentials') {
-                        app.push("${env.BUILD_NUMBER}")
-                        app.push('latest') }
+                    docker.withRegistry('', registryCredential ) {
+                        dockerImage.push()
+                    }
                 }
             }
         }
