@@ -28,15 +28,13 @@ pipeline {
         stage('Build Docker Image') { 
             steps { 
 		echo '=== Building Petclinic Docker Image ===' 
-		script { 
-			app = docker.build("ibuchh/petclinic-spinnaker-jenkins")
-                }
+		sh "sudo docker build -t ducluanxutrieu/petclinic-spinnaker-jenkins ."
             }
         }
         stage('Push Docker Image') { 
-		when { 
-			branch 'master'
-            }
+//		when { 
+//			branch 'master'
+//            }
             steps { 
 		echo '=== Pushing Petclinic Docker Image ===' 
 		script { 
