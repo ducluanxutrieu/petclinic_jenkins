@@ -1,4 +1,4 @@
-pipeline { 
+\pipeline { 
     agent any 
 	triggers { 
 		pollSCM "* * * * *"
@@ -23,7 +23,7 @@ pipeline {
 	//		always { 
 	//		junit 'target/surefire-reports/*.xml'
             //    }
-            }
+ //           }
         }
         stage('Build Docker Image') { 
 		when { 
