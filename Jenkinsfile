@@ -3,13 +3,13 @@ pipeline {
        triggers {
         pollSCM "* * * * *"
        }
-    stages {
-        stage('Build Application') { 
-            steps {
+	 tools { 
+		maven 'M3'
+	}
+	 stage('Build Application') {
+             steps {
                 echo '=== Building Petclinic Application ==='
-		withMaven(maven: 'mvn') {
 		sh "mvn -B -DskipTests clean package"
-			}
         }        }
         stage('Test Application') {
             steps {
