@@ -1,6 +1,7 @@
 pipeline { 
-    agent any triggers { 
-	pollSCM "* * * * *"
+    agent any 
+	triggers { 
+		pollSCM "* * * * *"
        }
 
     tools { 
@@ -18,16 +19,16 @@ pipeline {
 			echo '=== Testing Petclinic Application ===' 
 			sh 'mvn test'
             }
-            	post { 
+                post { 
 			always { 
-				junit 'target/surefire-reports/*.xml'
+			junit 'target/surefire-reports/*.xml'
                 }
             }
         }
         stage('Build Docker Image') { 
 		when { 
 			branch 'master'
-            	}
+               }
             steps { 
 		echo '=== Building Petclinic Docker Image ===' 
 		script { 
