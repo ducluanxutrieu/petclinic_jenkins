@@ -7,9 +7,8 @@ pipeline {
         stage('Build Application') { 
             steps {
                 echo '=== Building Petclinic Application ==='
-		withMaven(maven: 'mvn') { 
-			sh 'mvn -B -DskipTests clean package'
-			}
+		def mvnHome = tool name: 'Apache Maven 3.6.0', type: 'maven'
+		sh '${mvnHome}/bin/mvn -B -DskipTests clean package'
         }        }
         stage('Test Application') {
             steps {
