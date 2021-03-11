@@ -28,7 +28,7 @@ pipeline {
         stage('Build Docker Image') { 
             steps { 
 		echo '=== Building Petclinic Docker Image ===' 
-		sh "sudo docker build -t ducluanxutrieu/petclinic-spinnaker-jenkins ."
+		sh "docker build -t ducluanxutrieu/petclinic-spinnaker-jenkins ."
             }
         }
         stage('Push Docker Image') { 
