@@ -50,7 +50,7 @@ pipeline {
                         dockerImage.push()
                     }
                     docker.withRegistry("https://966163032495.dkr.ecr.ap-southeast-1.amazonaws.com/spinnaker", "ecr:ap-southeast-1:aws_credential") {
-                        docker.image("ducluanxutrieu/petclinic-spinnaker-jenkins").push()
+                        docker.image("petclinic").push()
                     }
                 }
             }
